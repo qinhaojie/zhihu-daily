@@ -1,9 +1,22 @@
 .article{
   width: 100%;
   border-radius: 3px;
-  box-shadow: 1px 0px 3px rgba(0,0,0,0.2);
+  box-shadow: 1px 0px 3px rgba(0,0,0,0.2),
+    0px 1px 3px rgba(0,0,0,0.2);
   box-sizing: border-box;
   padding: 13px 16px;
   background: #fff;
   margin-bottom: 7px;
+  display: flex;
+  & > img{
+    flex-grow: 0;
+    width: 82px;
+    height: 72px;
+  }
+
+  & > h3{
+    flex: 1;
+    padding-right: 9px;
+    padding-top: 5px;
+  }
 }
