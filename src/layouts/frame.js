@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import Header from './header'
+import Header from '../components/header'
 export default class Frame extends Component {
   render() {
     return (

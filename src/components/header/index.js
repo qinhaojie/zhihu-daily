@@ -8,10 +8,10 @@ export default class Header extends Component {
   }
 
   getChildren() {
-    if(!this.props.children){
+    if (!this.props.children) {
       return [
         <span className="header-nav"> <span className="icon icon-bars"></span></span>,
-        <span className="header-nav">2</span>
+        <span className="header-nav">首页</span>
       ]
     }
     return this.props.children
