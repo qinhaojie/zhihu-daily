@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router'
 import Article from './article'
 export default class ArticleList extends Component {
   render() {
-    const children = this.props.articles.map((article, i) => {
+    const children = this.props.articles.map((article) => {
       return (
-        <Article {...article} key={i}></Article>
+        <Link to={`/detail/${article.id}`}>
+          <Article {...article} key={article.id}></Article>
+        </Link>
       )
     })
     return (

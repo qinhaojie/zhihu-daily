@@ -6,7 +6,7 @@ export default class Article extends Component {
     return (
       <div className='article'>
         <h3>{this.props.title}</h3>
-        <img src={this.props.images[0].replace(/^https?:\/\/.*zhimg\.com/, '/proxyimg')}/>
+        <img src={this.props.images[0]}/>
       </div>
     )
   }

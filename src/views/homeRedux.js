@@ -9,11 +9,12 @@ const LOAD_LATEST = 'LOAD_LATEST'
 export function loadLatest() {
   return (dispatch, getState) => {
     fetch('/zapi/api/4/news/latest')
-      .then(r => r.json())
+      .then(r => r.text())
       .then(data => {
         dispatch({
           type: LOAD_LATEST,
-          data
+          text: data,
+          filter: true
         })
       })
   }

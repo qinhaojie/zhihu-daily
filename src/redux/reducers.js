@@ -1,6 +1,8 @@
 import home from '../views/homeRedux'
+import detail from '../views/detailRedux'
 import { combineReducers } from 'redux'
-console.log(home)
+
 export default combineReducers({
-  home
+  home,
+  detail
 })
