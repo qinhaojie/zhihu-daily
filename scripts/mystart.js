@@ -20,20 +20,22 @@ const app = express();
 if (isDeveloping) {
   const WEBPACK_PORT = 3002;
   const compiler = webpack(webpackConfig);
-  console.log(webpackConfig.output.publicPath)
   app.use(webpackMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
     stats: {
       colors: true,
       hash: false,
       timings: false,
+      hot: true,
       chunks: false,
       chunkModules: false,
       modules: false
     }
   }));
 
-  app.use(webpackHotMiddleware(compiler));
+  app.use(webpackHotMiddleware(compiler, {
+    reload: true
+  }));
   // app.listen(WEBPACK_PORT, 'localhost', function (err, result) {
   //   if (err) {
   //     console.log(err);
