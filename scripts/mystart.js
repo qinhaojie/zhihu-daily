@@ -8,7 +8,7 @@ let path = require('path');
 let http = require('http');
 let bodyParser = require('body-parser');
 var webpackConfig = require('../config/webpack.config.dev');
-
+var proxy = require('express-http-proxy');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isDeveloping = !isProduction;
@@ -18,7 +18,6 @@ const app = express();
 
 // Webpack dev server
 if (isDeveloping) {
-  const WEBPACK_PORT = 3002;
   const compiler = webpack(webpackConfig);
   app.use(webpackMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
@@ -36,27 +35,36 @@ if (isDeveloping) {
   app.use(webpackHotMiddleware(compiler, {
     reload: true
   }));
-  // app.listen(WEBPACK_PORT, 'localhost', function (err, result) {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-
-  //   console.log('WebpackDevServer listening at localhost:'+WEBPACK_PORT);
-  // });
 }
 
-//  RESTful API
+
 const publicPath = path.resolve(__dirname, '../public/');
 app.use(bodyParser.json({ type: 'application/json' }))
 app.use(express.static(publicPath));
 
-const port = isProduction ? (process.env.PORT || 80) : 3001;
-app.get(/proxyimg/, (req, res) => {
+// 图片代理
+app.use('/proxyimg', proxy('pic1.zhimg.com', {
+  decorateRequest: function(proxyReq, originalReq) {
+    
+    proxyReq.url = originalReq.url.replace('/proxyimg/', '/')
+    proxyReq.headers['Host'] = 'pic1.zhimg.com'
+    delete proxyReq.headers.referer
+    return proxyReq
+  }
+}))
 
-  http.get(req.url.replace('/proxyimg/', 'http://pic1.zhimg.com/'), (r) => {
-    r.pipe(res)
-  })
-})
+app.use('/zapi', proxy('news-at.zhihu.com', {
+  // decorateRequest: function(proxyReq, originalReq) {
+  //   delete proxyReq.headers.referer
+  //   console.log(originalReq)
+  //   // proxyReq.url = originalReq.originalUrl
+  //   console.log(proxyReq.url)
+  //   return proxyReq
+  // }
+}))
+
+const port = isProduction ? (process.env.PORT || 80) : 3001;
+
 app.get('*', function (request, response){
   let pathFields = request.originalUrl.split('/')
 

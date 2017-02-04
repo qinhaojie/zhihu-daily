@@ -7,13 +7,36 @@ const data = {"date":"20170203","stories":[{"images":["http:\/\/pic1.zhimg.com\/
 import ArticleList from '../components/home/articleList'
 export default class Home extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: {
+        stories: []
+      }
+    }
+
+  }
+
+  componentDidMount() {
+    fetch('/zapi/api/4/news/latest')
+      .then(r => r.json())
+      .then(data => {
+        console.log(data)
+        this.setState({
+          data: {
+            stories: data.stories
+          }
+        })
+      })
+  }
+
   render() {
     return (
       <div className='home-content'>
         <div className='hot-story-container'>展示</div>
         <h3>今日新闻</h3>
         <div className='story-container'>
-          <ArticleList articles={data.stories}></ArticleList>
+          <ArticleList articles={this.state.data.stories}></ArticleList>
         </div>
       </div>
     )
