@@ -5,8 +5,8 @@ export default class ArticleList extends Component {
   render() {
     const children = this.props.articles.map((article) => {
       return (
-        <Link to={`/detail/${article.id}`}>
-          <Article {...article} key={article.id}></Article>
+        <Link to={`/detail/${article.id}`} key={article.id}>
+          <Article {...article}></Article>
         </Link>
       )
     })
