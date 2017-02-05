@@ -20,8 +20,9 @@ class Detail extends Component {
 
   render() {
     let {content, params} = this.props
-    const children = content.id === Number(params.id) ?
-      <Content {...this.props.content}></Content> : <div className="detail-loading"><Loading style={{fontSize: 36}}></Loading></div>
+    const children = content.id === Number(params.id)
+    ? <Content {...this.props.content}></Content>
+    : <div className="detail-loading"><Loading style={{fontSize: 36}}></Loading></div>
     return (
       <div className='detail-wrapper'>
         {children}
