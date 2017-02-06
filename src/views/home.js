@@ -6,7 +6,7 @@ import './home.less'
 import * as homeAction from './homeRedux'
 import Slider from 'react-slick'
 import moment from 'moment'
-import ArticleList from '../components/home/articleList'
+import ArticleWrapper from '../components/home/articleWrapper'
 import TopStory from '../components/home/topStory'
 import { Link } from 'react-router'
 class Home extends Component {
@@ -56,7 +56,7 @@ class Home extends Component {
     const date = moment(this.props.date).subtract(this.loadBeforeCount, 'days')
 
     this.loadBeforeCount++
-    let promise =this.props.action.loadBefore(date.format('YYYYMMDD'))
+    let promise = this.props.action.loadBefore(date.format('YYYYMMDD'))
     promise.then(data => {
       console.log(data)
       this.isLoadingMore = false
@@ -77,6 +77,15 @@ class Home extends Component {
    // console.log(e.touches[0])
   }
 
+
+  getArticle() {
+    return this.props.stories.map((story, i) => {
+      return (
+        <ArticleWrapper {...story} key={i}></ArticleWrapper>
+      )
+    })
+  }
+
   render() {
     return (
       <div className='home-content' 
@@ -86,10 +95,7 @@ class Home extends Component {
         <div className='hot-story-container'>
           {this.getSlider()}
         </div>
-        <h3>今日新闻</h3>
-        <div className='story-container'>
-          <ArticleList articles={this.props.stories}></ArticleList>
-        </div>
+        {this.getArticle()}
       </div>
     )
   }

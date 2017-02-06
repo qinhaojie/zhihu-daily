@@ -1,6 +1,6 @@
 const initState = {
   topStories: [],
-  stories: [],
+  stories: [], // [{date:'',stories;[]},{}]
   date: ''
 }
 
@@ -38,20 +38,37 @@ export function loadBefore(date) {
 
 export default function home(state = initState, action) {
   switch (action.type) {
-    case LOAD_LATEST:
+    case LOAD_LATEST: {
+      // 最新的日期与条数都与state中的第一个相同时候，不用更新state
+      if (state.stories[0] && action.data.date === state.stories[0].date) {
+        if (state.stories[0].stories.length === action.data.stories.length) {
+          return state
+        }
+      }
+      let stories = [
+        {
+          stories: action.data.stories,
+          date: action.data.date
+        },
+        ...state.stories
+      ]
       return {
         ...state,
         topStories: action.data['top_stories'],
-        stories: action.data.stories,
+        stories,
         date: action.data.date
       }
-    case LOAD_BEFORE:
-      const stories = [...state.stories, ...action.data.stories]
+    }
+    case LOAD_BEFORE: {
+      let stories = [...state.stories, {
+        stories: action.data.stories,
+        date: action.data.date
+      }]
       return {
         ...state,
         stories
       }
-
+    }
     default:
       return state
   }
