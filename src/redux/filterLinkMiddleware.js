@@ -4,6 +4,6 @@ export default function(store) {
       var text = action.text.replace(/https?:(\\)?\/(\\)?\/.{2,8}\.zhimg\.com/g, '/proxyimg')
       action.data = JSON.parse(text)
     }
-    next(action)
+    return next(action)
   }
 }
