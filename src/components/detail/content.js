@@ -4,10 +4,7 @@ import './content.less'
 export default class Content extends Component {
 
   componentDidMount() {
-    
-
     this.addHolderInfo()
-
   }
 
   addHolderInfo() {
@@ -19,8 +16,7 @@ export default class Content extends Component {
       <span class="img-source">${image_source}</span>
     `
     const img = placeHolder.querySelector('.img-container')
-    img.style.background = `url(${this.props.image})`
-    img.style.backgroundSize = '100% 100%'
+    img.style.backgroundImage = `url(${this.props.image})`
   }
 
   render() {
