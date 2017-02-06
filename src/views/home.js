@@ -7,6 +7,8 @@ import * as homeAction from './homeRedux'
 import Slider from 'react-slick'
 
 import ArticleList from '../components/home/articleList'
+import TopStory from '../components/home/topStory'
+import { Link } from 'react-router'
 class Home extends Component {
 
   constructor(props) {
@@ -20,15 +22,24 @@ class Home extends Component {
   getSlider() {
     if (this.props.topStories.length === 0) return null
     var settings = {
-      dots: false,
+      dots: true,
+      dotsClass: 'top-slider-dots',
       infinite: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      arrows: false
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 5000
     }
     const children = this.props.topStories.map(story => {
-      return <img src={story.image} key={story.id}></img>
+      return (
+        <div key={story.id}>
+          <Link to={`/detail/${story.id}`}>
+            <TopStory {...story} className='top-story-holder'></TopStory>
+          </Link>
+        </div>
+        )
     })
     return (
       <Slider {...settings}>

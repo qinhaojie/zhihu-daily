@@ -1,13 +1,36 @@
 .home-content{
   background: #f3f3f3;
   min-height: 100%;
+
+  .top-slider-dots{
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+    
+    & > li {
+      border-radius: 50%;
+      background: #858688;
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      
+      margin-left: 3px;
+      > button {
+        display: none;
+      }
+      &.slick-active{
+        background: #fffeff;
+      }
+    }
+  }
+
   .hot-story-container{
     width: 100%;
     max-width: 100%;
     height: 226px;
-    background: blue;
-
-    img{
+    background: #fff;
+    .top-story-holder{
       height: 226px;
     }
   }
