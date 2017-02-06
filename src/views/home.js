@@ -9,11 +9,14 @@ import moment from 'moment'
 import ArticleWrapper from '../components/home/articleWrapper'
 import TopStory from '../components/home/topStory'
 import { Link } from 'react-router'
+import Loading from '../components/loading'
 class Home extends Component {
 
   constructor(props) {
     super(props)
-    this.isLoadingMore = false
+    this.state = {
+      isLoadingMore: false
+    }
     this.loadBeforeCount = 0
   }
 
@@ -51,15 +54,19 @@ class Home extends Component {
   }
 
   loadMore() {
-    if (this.isLoadingMore) return
-    this.isLoadingMore = true
+    if (this.state.isLoadingMore) return
+    this.setState({
+      isLoadingMore: true
+    })
     const date = moment(this.props.date).subtract(this.loadBeforeCount, 'days')
 
     this.loadBeforeCount++
     let promise = this.props.action.loadBefore(date.format('YYYYMMDD'))
     promise.then(data => {
       console.log(data)
-      this.isLoadingMore = false
+      this.setState({
+        isLoadingMore: false
+      })
     })
   }
 
@@ -96,6 +103,11 @@ class Home extends Component {
           {this.getSlider()}
         </div>
         {this.getArticle()}
+        {true || this.state.isLoadingMore
+          ? (<div className='load-more-loading'>
+              <Loading style={{fontSize: 20}}></Loading>
+            </div>)
+          : null }
       </div>
     )
   }

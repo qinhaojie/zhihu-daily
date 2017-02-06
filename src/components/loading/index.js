@@ -19,7 +19,7 @@ export default class loading extends Component {
   render() {
     const style = Object.assign({}, this.state.style, this.props.style || {})
     return (
-      <i className="icon icon-spinner icon-spin zh-loading" style={style}></i>
+      <i className="icon icon-circle-o-notch icon-spin zh-loading" style={style}></i>
     )
   }
 }
