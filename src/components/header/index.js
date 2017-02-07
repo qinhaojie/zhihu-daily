@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './header.less'
-export default class Header extends Component {
+export default class HeaderNav extends Component {
 
   constructor(props) {
     super(props)
@@ -22,11 +22,9 @@ export default class Header extends Component {
     var children = this.getChildren()
 
     return (
-      <div>
-        <header className='header'>
-          {children}
-        </header>
-      </div>
+      <header className='header'>
+        {children}
+      </header>
     )
   }
 }

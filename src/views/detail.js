@@ -11,6 +11,7 @@ class Detail extends Component {
   componentDidMount() {
     const id = this.props.params.id
     this.props.action.loadContent(id)
+    this.props.action.loadExtra(id)
   }
 
 
@@ -34,7 +35,7 @@ class Detail extends Component {
 export default connect(
   (state) => {
     return {
-      content: state.detail.data
+      content: state.detail.content
     }
   },
   (dispatch) => {

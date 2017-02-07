@@ -21,6 +21,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    console.log('mount')
     this.props.action.loadLatest()
   }
 
@@ -92,8 +93,17 @@ class Home extends Component {
       )
     })
   }
+  
+  componentWillReceiveProps() {
+    console.log('receive')
+  }
+
+  componentWillUpdate() {
+    console.log('willup')
+  }
 
   render() {
+    console.log('render')
     return (
       <div className='home-content' 
         onTouchStart={this.onTouchStart.bind(this)}

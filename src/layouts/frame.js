@@ -1,11 +1,11 @@
 import React, { Component} from 'react'
-import Header from '../components/header'
+import Header from '../views/header'
 export default class Frame extends Component {
   render() {
     return (
       <div>
         <section>
-          <Header></Header>
+          <Header {...this.props}></Header>
         </section>
         <section>
           {this.props.children}

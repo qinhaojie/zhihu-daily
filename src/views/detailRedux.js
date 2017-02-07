@@ -1,9 +1,10 @@
 const initState = {
-  data: {}
+  content: {},
+  extra: {}
 }
 
 const LOAD_CONTENT = 'LOAD_CONTENT'
-
+const LOAD_EXTRA = 'LOAD_EXTRA'
 
 export function loadContent(id) {
   return (dispatch, getState) => {
@@ -19,12 +20,34 @@ export function loadContent(id) {
   }
 }
 
+export function loadExtra(id) {
+  return (dispatch, getState) => {
+    fetch('/zapi/api/4/story-extra/' + id)
+      .then(r => r.json())
+      .then(data => {
+        dispatch({
+          type: LOAD_EXTRA,
+          data
+        })
+      })
+  }
+}
+
+
+
 export default function detail(state = initState, action) {
   switch (action.type) {
     case LOAD_CONTENT:
       return {
-        data: action.data
+        ...state,
+        content: action.data
       }
+    case LOAD_EXTRA: {
+      return {
+        ...state,
+        extra: action.data
+      }
+    }
 
     default:
       return state
