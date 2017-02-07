@@ -4,7 +4,12 @@ module.exports = {
         "standard",
         "promise"
     ],
+    "env": {
+        "browser": true,
+        "node": true
+    },
     "rules": {
-        "space-before-function-paren": ["error", "never"]
+        "space-before-function-paren": ["error", "never"],
+        "jsx-quotes": ["off", "prefer-single"]
     }
 };

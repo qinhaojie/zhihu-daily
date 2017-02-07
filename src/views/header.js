@@ -5,7 +5,6 @@ class Header extends Component {
 
   getLeftChildren() {
     const pathname = this.props.location.pathname
-    let children
     if (pathname === '/') {
       return (
         <div className="header-left-nav">
@@ -26,13 +25,9 @@ class Header extends Component {
 
   getRightChildren() {
     const pathname = this.props.location.pathname
-    let children
     if (pathname === '/') {
       return (
-        <div className="header-right-nav">
-          <span className="header-nav-button icon icon-bars"></span>
-          <span className="header-nav-button">首页</span>
-        </div>
+        null
       )
     } else if (/^\/detail\/\d+$/.test(pathname)) {
       const {comments, popularity} = this.props
