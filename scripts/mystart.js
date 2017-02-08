@@ -63,7 +63,7 @@ app.use('/zapi', proxy('news-at.zhihu.com', {
   // }
 }))
 
-const port = isProduction ? (process.env.PORT || 80) : 3001;
+const port = isProduction ? (process.env.PORT || 80) : 4000;
 
 app.get('*', function (request, response){
   let pathFields = request.originalUrl.split('/')
