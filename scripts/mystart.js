@@ -1,3 +1,4 @@
+'use strict'
 process.env.NODE_ENV = 'development'
 let webpack = require('webpack');
 let webpackMiddleware = require('webpack-dev-middleware');
