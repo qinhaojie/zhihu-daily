@@ -27,9 +27,9 @@ function ensureSlash(path, needsSlash) {
 // We can't use a relative path in HTML because we don't want to load something
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 var homepagePath = require(paths.appPackageJson).homepage;
-//homepagePath = 'http://static.qinhaojie.top/zhihu-daily'
+homepagePath = 'http://static.qinhaojie.top/zhihu'
 var homepagePathname = homepagePath ? url.parse(homepagePath).pathname : '/';
-//homepagePathname = homepagePath
+homepagePathname = homepagePath
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
 var publicPath = ensureSlash(homepagePathname, true);
