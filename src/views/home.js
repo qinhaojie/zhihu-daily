@@ -19,11 +19,12 @@ class Home extends Component {
       isLoadingMore: false
     }
     this.loadBeforeCount = 0
+    this.onScroll = this.onScroll.bind(this)
   }
 
   componentDidMount() {
-    console.log('mount')
     this.props.action.loadLatest()
+    window.addEventListener('scroll', this.onScroll)
   }
 
   getSlider() {
@@ -42,7 +43,7 @@ class Home extends Component {
     const children = this.props.topStories.map(story => {
       return (
         <div key={story.id}>
-          <Link to={`/detail/${story.id}`}>
+          <Link to={'/detail/' + story.id}>
             <TopStory {...story} className='top-story-holder'></TopStory>
           </Link>
         </div>
@@ -56,7 +57,7 @@ class Home extends Component {
   }
 
   loadMore() {
-    if (this.state.isLoadingMore) return
+    if (this.state.isLoadingMore || !this.props.date) return
     this.setState({
       isLoadingMore: true
     })
@@ -65,27 +66,21 @@ class Home extends Component {
     this.loadBeforeCount++
     let promise = this.props.action.loadBefore(date.format('YYYYMMDD'))
     promise.then(data => {
-      console.log(data)
       this.setState({
         isLoadingMore: false
       })
     })
   }
 
-  onTouchStart(e) {
-   // console.log(e.touches[0])
-  }
-
-  onTouchEnd(e) {
+  onScroll(e) {
+    console.log(1)
     if (document.body.scrollTop + document.body.clientHeight > document.body.scrollHeight - 100) {
       this.loadMore()
     }
   }
-
-  onTouchMove(e) {
-   // console.log(e.touches[0])
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
   }
-
 
   getArticle() {
     return this.props.stories.map((story, i) => {
@@ -94,26 +89,15 @@ class Home extends Component {
       )
     })
   }
-  
-  componentWillReceiveProps() {
-    console.log('receive')
-  }
-
-  componentWillUpdate() {
-    console.log('willup')
-  }
 
   render() {
     return (
-      <div className='home-content' 
-        onTouchStart={this.onTouchStart.bind(this)}
-        onTouchEnd={this.onTouchEnd.bind(this)}
-        onTouchMove={this.onTouchMove.bind(this)}>
+      <div className='home-content'>
         <div className='hot-story-container'>
           {this.getSlider()}
         </div>
         {this.getArticle()}
-        {true || this.state.isLoadingMore
+        {true ||this.state.isLoadingMore
           ? (<div className='load-more-loading'>
               <Loading style={{fontSize: 20}}></Loading>
             </div>)
