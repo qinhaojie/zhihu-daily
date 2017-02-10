@@ -73,7 +73,6 @@ class Home extends Component {
   }
 
   onScroll(e) {
-    console.log(1)
     if (document.body.scrollTop + document.body.clientHeight > document.body.scrollHeight - 100) {
       this.loadMore()
     }
