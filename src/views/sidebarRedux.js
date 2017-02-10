@@ -41,7 +41,6 @@ export default function sidebar(state = initState, action) {
         visible: !state.visible
       }
     case LOAD_THEMES: {
-      console.log(action.data)
       return {
         ...state,
         themes: action.data.others
