@@ -1,0 +1,28 @@
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1000;
+  &--active{
+    opacity: 1;
+  }
+}
+
+.drawer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  z-index: 1001;
+  min-width: 100px;
+  background: #fff;
+  transition: transform 0.3s;
+  &--active{
+    transform: translateX(0)
+  }
+}

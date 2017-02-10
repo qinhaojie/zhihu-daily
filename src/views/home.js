@@ -10,6 +10,8 @@ import ArticleWrapper from '../components/home/articleWrapper'
 import TopStory from '../components/home/topStory'
 import { Link } from 'react-router'
 import Loading from '../components/loading'
+import Sidebar from './sidebar'
+
 class Home extends Component {
 
   constructor(props) {
@@ -103,7 +105,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log('render')
     return (
       <div className='home-content' 
         onTouchStart={this.onTouchStart.bind(this)}
@@ -118,6 +119,7 @@ class Home extends Component {
               <Loading style={{fontSize: 20}}></Loading>
             </div>)
           : null }
+        <Sidebar></Sidebar>
       </div>
     )
   }
