@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import HeaderNav from '../components/header'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { setVisible } from './sidebarRedux'
 class Header extends Component {
 
 
   goBack() {
     this.props.router.goBack()
+  }
+
+  showSidebar() {
+    this.props.action.setVisible(true)
   }
 
   getLeftChildren() {
@@ -15,7 +21,7 @@ class Header extends Component {
     if (pathname === '/') {
       return (
         <div className="header-left-nav">
-          <span className="header-nav-button icon icon-bars"></span>
+          <span className="header-nav-button icon icon-bars" onClick={this.showSidebar.bind(this)}></span>
           <span className="header-nav-button">首页</span>
         </div>
       )
@@ -78,6 +84,13 @@ export default connect(
   (state) => {
     return {
       ...state.detail.extra
+    }
+  },
+  (dispatch) => {
+    return {
+      action: {
+        setVisible: bindActionCreators(setVisible, dispatch)
+      }
     }
   }
 )(Header)

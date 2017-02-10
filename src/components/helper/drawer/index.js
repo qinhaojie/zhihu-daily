@@ -6,31 +6,24 @@ export default class Drawer extends React.Component {
 
   constructor(prop) {
     super(prop)
-    this.state = {
-      visible: true
-    }
   }
 
   onOverlayClick(e) {
-    if (this.props.autoHide) {
-      this.hide()
+    this.props.onHide()
+  }
+
+
+  setBodyScrollable(visible) {
+    if (!visible) {
+      document.documentElement.classList.remove('drawer--open')
+    } else {
+      document.documentElement.classList.add('drawer--open')
     }
   }
 
-  hide() {
-    this.setState({
-      visible: false
-    })
-  }
-
-  show() {
-    this.setState({
-      visible: true
-    })
-  }
-
   render() {
-    const { visible } = this.state
+    const { visible } = this.props
+    this.setBodyScrollable(visible)
     const overlayClass = classnames('overlay', {'overlay--active': visible})
     const drawerClass = classnames('drawer', {'drawer--active': visible})
     return (
@@ -48,6 +41,5 @@ export default class Drawer extends React.Component {
 
 Drawer.defaultProps = {
   onHide: () => {},
-  onShow: () => {},
-  autoHide: true
+  visible: false
 }

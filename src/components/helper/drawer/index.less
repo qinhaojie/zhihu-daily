@@ -8,8 +8,10 @@
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 1000;
+  display: none;
   &--active{
     opacity: 1;
+    display: block;
   }
 }
 
@@ -17,6 +19,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  overflow: auto;
   transform: translateX(-100%);
   z-index: 1001;
   min-width: 100px;
@@ -24,5 +28,12 @@
   transition: transform 0.3s;
   &--active{
     transform: translateX(0)
+  }
+}
+
+html.drawer--open{
+  overflow: hidden;
+  body{
+    overflow: hidden;
   }
 }

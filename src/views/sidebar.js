@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 
 import Drawer from '../components/helper/drawer'
 import Theme from '../components/sidebar/theme'
+import Header from '../components/sidebar/header'
+import * as actions from './sidebarRedux'
 import './sidebar.less'
 class Sidebar extends Component {
 
@@ -13,16 +15,16 @@ class Sidebar extends Component {
   }
 
   componentDidMount() {
-   
+    this.props.action.loadThemes()
   }
 
 
   render() {
     return (
-      <Drawer>
+      <Drawer visible={this.props.visible} onHide={() => { this.props.action.setVisible(false) }}>
         <div className="sidebar-container">
-          title
-          <Theme></Theme>
+          <Header></Header>
+          <Theme themes={this.props.themes}></Theme>
         </div>
       </Drawer>
     )
@@ -30,15 +32,15 @@ class Sidebar extends Component {
 }
 
 export default connect(
-  // (state) => {
-  //   return {
-  //     ...state.home
-  //   }
-  // },
-  // (dispatch) => {
-  //   return {
-  //     action: bindActionCreators(homeAction, dispatch)
-  //   }
-  // }
+  (state) => {
+    return {
+      ...state.sidebar
+    }
+  },
+  (dispatch) => {
+    return {
+      action: bindActionCreators(actions, dispatch)
+    }
+  }
 
 )(Sidebar)
