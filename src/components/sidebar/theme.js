@@ -6,8 +6,8 @@ export default class Theme extends Component {
   getList() {
     return this.props.themes.map((theme, i) => {
       return (
-        <Link to={`/theme/${theme.id}`}>
-          <li className="theme-item" key={theme.id}>
+        <Link to={`/theme/${theme.id}`} key={theme.id} activeClassName="theme-item--active">
+          <li className="theme-item" onClick={this.props.onItemClick}>
             {theme.name}
           </li>
         </Link>
@@ -20,6 +20,12 @@ export default class Theme extends Component {
       <div>
 
         <ul className="sidebar-theme-list">
+          <Link to='/' activeClassName="theme-item--active" onlyActiveOnIndex={true}>
+            <li className="theme-item theme-item--home" onClick={this.props.onItemClick}>
+              <span className="icon icon-home"></span>
+              首页
+            </li>
+          </Link>
           {this.getList()}
         </ul>
       </div>
@@ -28,5 +34,6 @@ export default class Theme extends Component {
 }
 
 Theme.defaultProps = {
-  themes: []
+  themes: [],
+  onItemClick: () => {}
 }

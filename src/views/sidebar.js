@@ -18,13 +18,16 @@ class Sidebar extends Component {
     this.props.action.loadThemes()
   }
 
+  hideSidebar() {
+    this.props.action.setVisible(false)
+  }
 
   render() {
     return (
-      <Drawer visible={this.props.visible} onHide={() => { this.props.action.setVisible(false) }}>
+      <Drawer visible={this.props.visible} onHide={this.hideSidebar.bind(this)}>
         <div className="sidebar-container">
           <Header></Header>
-          <Theme themes={this.props.themes}></Theme>
+          <Theme themes={this.props.themes} onItemClick={this.hideSidebar.bind(this)}></Theme>
         </div>
       </Drawer>
     )

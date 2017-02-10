@@ -19,6 +19,13 @@ class Theme extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps,b) {
+    const id = nextProps.params.id
+    if (id !== this.props.params.id) {
+      this.props.action.loadThemeInfo(id)
+    }
+  }
+
   render() {
     const {image, description} = this.props
     return (

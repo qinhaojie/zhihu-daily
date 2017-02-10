@@ -39,9 +39,7 @@ export function loadThemeInfo(id) {
 export default function theme(state = initState, action) {
   switch (action.type) {
     case LOAD_THEME_INFO: {
-      console.log(action.data)
       return {
-        
         ...action.data
       }
     }

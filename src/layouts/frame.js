@@ -1,5 +1,6 @@
 import React, { Component} from 'react'
 import Header from '../views/header'
+import Sidebar from '../views/sidebar'
 export default class Frame extends Component {
   render() {
     return (
@@ -10,6 +11,7 @@ export default class Frame extends Component {
         <section>
           {this.props.children}
         </section>
+        <Sidebar></Sidebar>
       </div>
     )
   }

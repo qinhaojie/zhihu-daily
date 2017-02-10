@@ -40,6 +40,13 @@ class Header extends Component {
           </span>
         </div>
       )
+    } else if (/^\/theme\/\d+$/.test(pathname)) {
+      return (
+        <div className="header-left-nav">
+          <span className="header-nav-button icon icon-bars" onClick={this.showSidebar.bind(this)}></span>
+          <span className="header-nav-button">{this.props.name}</span>
+        </div>
+      )
     }
 
     return null
@@ -83,7 +90,8 @@ class Header extends Component {
 export default connect(
   (state) => {
     return {
-      ...state.detail.extra
+      ...state.detail.extra,
+      name: state.theme.name
     }
   },
   (dispatch) => {
