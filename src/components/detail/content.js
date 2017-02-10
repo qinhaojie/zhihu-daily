@@ -10,6 +10,7 @@ export default class Content extends Component {
   addHolderInfo() {
     const { title, image_source } = this.props
     const placeHolder = this.refs.wrapper.querySelector('.img-place-holder')
+    if (!placeHolder) return
     placeHolder.innerHTML = `
       <div class="img-container"></div>
       <div class="title">${title}</div>

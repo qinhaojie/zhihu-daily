@@ -7,7 +7,7 @@ export default class ArticleWrapper extends Component {
   render() {
     return (
       <div className='article-wrapper'>
-        <span>{moment(this.props.date).format('MMMMDo dddd')}</span>
+        {this.props.date ? <span>{moment(this.props.date).format('MMMMDo dddd')}</span> : null}
         <div className='story-container'>
           <ArticleList articles={this.props.stories}></ArticleList>
         </div>

@@ -21,6 +21,10 @@ export default class Drawer extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.setBodyScrollable(false)
+  }
+
   render() {
     const { visible } = this.props
     this.setBodyScrollable(visible)
