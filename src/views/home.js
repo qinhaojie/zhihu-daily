@@ -24,6 +24,12 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.action.loadLatest()
+    const scrollTop = window.sessionStorage.getItem('homeScroll')
+    if (screenTop) {
+      setTimeout(()=>{
+        document.body.scrollTop = scrollTop
+      }, 10)
+    }
     window.addEventListener('scroll', this.onScroll)
   }
 
@@ -79,6 +85,7 @@ class Home extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll)
+    window.sessionStorage.setItem('homeScroll', document.body.scrollTop)
   }
 
   getArticle() {

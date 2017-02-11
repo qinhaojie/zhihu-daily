@@ -10,6 +10,7 @@ class Detail extends Component {
 
   componentDidMount() {
     const id = this.props.params.id
+    document.body.scrollTop = 0
     this.props.action.loadContent(id)
     this.props.action.loadExtra(id)
   }
