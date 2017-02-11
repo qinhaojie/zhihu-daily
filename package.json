@@ -69,8 +69,7 @@
     "request": "^2.79.0"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "s2": "node scripts/mystart.js",
+    "start": "node scripts/mystart.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
