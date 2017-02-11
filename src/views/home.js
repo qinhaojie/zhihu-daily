@@ -25,12 +25,10 @@ class Home extends Component {
   componentDidMount() {
     this.props.action.loadLatest()
     const scrollTop = window.sessionStorage.getItem('homeScroll')
-    if (screenTop) {
-      setTimeout(()=>{
-        document.body.scrollTop = scrollTop
-      }, 10)
+    if (scrollTop) {
+      document.getElementById('root').scrollTop = scrollTop
     }
-    window.addEventListener('scroll', this.onScroll)
+    document.getElementById('root').addEventListener('scroll', this.onScroll)
   }
 
   getSlider() {
@@ -79,13 +77,13 @@ class Home extends Component {
   }
 
   onScroll(e) {
-    if (document.body.scrollTop + document.body.clientHeight > document.body.scrollHeight - 100) {
+    if (e.target.scrollTop + e.target.clientHeight > e.target.scrollHeight - 100) {
       this.loadMore()
     }
   }
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll)
-    window.sessionStorage.setItem('homeScroll', document.body.scrollTop)
+    document.getElementById('root').removeEventListener('scroll', this.onScroll)
+    window.sessionStorage.setItem('homeScroll', document.getElementById('root').scrollTop)
   }
 
   getArticle() {
